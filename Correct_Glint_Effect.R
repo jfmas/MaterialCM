@@ -1,4 +1,4 @@
-## BATIMETRIA
+## Manuscrito Mapeo batimétrico en aguas costeras con imágenes de satélite: Un estudio de caso en el Caribe Mexicano
 ## Apply Glint Correction
 ##  J. D. Hedley Corresponding author, A. R. Harborne & P. J. Mumby (2005) 
 ## Technical note: Simple and robust removal of sun glint for mapping 
@@ -6,20 +6,9 @@
 ## 2107-2112, DOI: 10.1080/01431160500034086
 
 ## QA https://pages.cms.hu-berlin.de/EOL/gcg_eo/02_data_quality.html
-
-
 # Deriving Bathymetry from Multispectral Remote Sensing Data, William J. Hernandez * and Roy A. Armstrong # 3.2. Bathymetry Retrieval
 
-library(terra)
-library(sf)
-library(dplyr)
-
-### Lee las imágenes Landsat
-setwd("/home/jf/pCloudDrive/proyectos/Batimetria")
-
-
-## Glint ###############################################################################################
-print("------------------- Glint correction")
+## ------------------- Function Glint correction --------------
 
 ### Function correct glint, input banda a procesar, bande NIR (enmascarada para agua)
 correct_glint <- function(bi,nir,nsample,maskdeep){
@@ -36,15 +25,3 @@ lm <- lm(y ~ x)
 ki <- lm$coefficients["x"]
 bigc = bi - ki*NIRgc
 return(bigc)} # fin function
-
-b1gc <- correct_glint(b1,b4,1000)
-#plot(b1gc)
-b2gc <- correct_glint(b2,b4,1000)
-#plot(b2gc)
-b3gc <- correct_glint(b3,b4,1000)
-#plot(b3gc)
-#writeRaster(c(b1gc,b2gc,b3gc), file=paste0("b123gc",prefix,".tif"), overwrite=TRUE, wopt= list(gdal=c("COMPRESS=NONE"), datatype='FLT4S'))
-
-
-
-
