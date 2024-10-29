@@ -27,4 +27,5 @@ lm <- lm(y ~ x)
 # slope of regression model
 ki <- lm$coefficients["x"]
 bigc = bi - ki*NIRgc
-return(bigc)} # fin function
+return(bigc)} 
+# fin function
