@@ -12,7 +12,6 @@ library(XML)
 library(xml2)
 ### Lee las imágenes Landsat
 setwd("/home/jf/pCloudDrive/proyectos/Batimetria")
-#rutaLandsat <- "images_Landsat/"
 
 
 ## Functions
@@ -128,10 +127,10 @@ b3[mask_cloud == 1 | mask_water ==0] <- NA
 b4[mask_cloud == 1 | mask_water ==0] <- NA
 b5[mask_cloud == 1 | mask_water ==0] <- NA
 
-# plot(b1)
-# plot(b2)
-# plot(b3)
-# plot(b4)
+plot(b1)
+plot(b2)
+plot(b3)
+plot(b4)
 
 ## Sitio Mahahual
 sitio <- "mah"

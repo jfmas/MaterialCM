@@ -98,7 +98,7 @@ b8[mask_water ==0] <- NA
 # plot(b4)
 
 sitio <- "mah"
-for(sitio in sitios){ 
+
   pts_bati <- vect(paste0("mapas/pts_bati",sitio,".gpkg"))
   ext <- ext(pts_bati) +c(0,200,0,200)
   subb1 <- crop(b1,ext)
@@ -109,9 +109,6 @@ for(sitio in sitios){
   plot(subb2)
   name <- paste0("cortes_S/",prefix,sitio,".tif")
   writeRaster(c(subb1,subb2,subb3,subb4,subb8), file=name, overwrite=TRUE, wopt= list(gdal=c("COMPRESS=NONE"), datatype='FLT4S'))
-
-
-
 
 ##############################################################################
 ################# FIN
