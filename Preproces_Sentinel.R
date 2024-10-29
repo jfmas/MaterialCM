@@ -17,7 +17,7 @@ setwd("/home/jf/pCloudDrive/proyectos/Batimetria")
 ## Functions
 # Function to reclassify CLS layer
 
-# De 0 a 11
+# CLS layer tiene 12 clases codificadas de 0 a 11
 # “No Data”, “Saturated or Defective”, “Dark area pixels”, “Cloud Shadows”, “Vegetation”, 
 # “non-Vegetated”, “Water”, “Unclassified”, “Cloud medium”, “Cloud high”, “Thin cirrus” and “Snow”.
 
