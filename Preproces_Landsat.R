@@ -41,8 +41,6 @@ water <- function(x){
 
 
 ## Lee los mapas de pts batimétricos
-
-
 pts_batimah <- vect("mapas/pts_batimah.gpkg") # 2844
 nrow(pts_batimah)
 
