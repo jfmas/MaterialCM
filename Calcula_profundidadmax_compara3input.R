@@ -2,7 +2,6 @@
 ## Manuscrito Mapeo batimétrico en aguas costeras con imágenes de satélite: 
 ## Un estudio de caso en el Caribe Mexicano
 
-
 # Determina la profundidad max a la cual "alcanza" la señal
 # reduce la profundidad max de manera iterativa
 # y  calcula la correlación R2 del modelo lineal 
