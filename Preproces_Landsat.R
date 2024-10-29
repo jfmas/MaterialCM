@@ -1,4 +1,6 @@
-## BATIMETRIA
+## Complemento artículo Ciencias Marinas
+## Manuscrito Mapeo batimétrico en aguas costeras con imágenes de satélite: 
+## Un estudio de caso en el Caribe Mexicano
 ##  PREPROCESSING: Untar Landsat files, apply mask, cut, read metadata, convert to SR and save.
 
 ## QA https://pages.cms.hu-berlin.de/EOL/gcg_eo/02_data_quality.html
@@ -60,13 +62,9 @@ nrow(pts_batipmor)
 ################# IMAGES LANDSAT 8 y 9 L2SP ya es reflectancia
 ##############################################################################
 
-lista <- list.files(path = "/home/jf/pCloudDrive/proyectos/BlueHole/images_Landsat", pattern = ".tar$", all.files = T, full.names = T)
-head(lista)
 tarfile <- "/home/jf/pCloudDrive/proyectos/BlueHole/images_Landsat/LC08_L2SP_019047_20141114_20200910_02_T1.tar"
-for (tarfile in lista){  
 
 prefix <- substr(tarfile,56,95)
-if (!file.exists(paste0("cortes_L/",prefix,"_mah.tif"))){ 
 untar(tarfile, exdir = "/tmp")
 print("-----------------------------------------------------------------")
 print("-----------------------------------------------------------------")
@@ -83,10 +81,8 @@ input_b5 <- paste0("/tmp/",prefix,"_SR_B5.TIF") # nir
 
 input_qa <- paste0("/tmp/",prefix,"_QA_PIXEL.TIF") # QA
 input_meta <- paste0("/tmp/",prefix,"_MTL.xml")
-## Checa que no falta ninguna banda de interés
-sigue <- min(file.exists(input_b1),file.exists(input_b2),file.exists(input_b3),file.exists(input_qa))
-if (sigue ==0){print("FALTA UNA BANDA")}else{ 
-  # Saca gain y offset del metadata
+
+# Saca gain y offset del metadata
   result <- read_xml(input_meta)
   gainb1 <- as.numeric(xml_text(xml_find_all(result, xpath = "//LEVEL2_SURFACE_REFLECTANCE_PARAMETERS/REFLECTANCE_MULT_BAND_1")))
   gainb2 <- as.numeric(xml_text(xml_find_all(result, xpath = "//LEVEL2_SURFACE_REFLECTANCE_PARAMETERS/REFLECTANCE_MULT_BAND_2")))
@@ -100,14 +96,6 @@ if (sigue ==0){print("FALTA UNA BANDA")}else{
   offsetb4 <- as.numeric(xml_text(xml_find_all(result, xpath = "//LEVEL2_SURFACE_REFLECTANCE_PARAMETERS/REFLECTANCE_ADD_BAND_4")))
   offsetb5 <- as.numeric(xml_text(xml_find_all(result, xpath = "//LEVEL2_SURFACE_REFLECTANCE_PARAMETERS/REFLECTANCE_ADD_BAND_5")))
   
-  #gains <- as.numeric(c(gainb1, gainb2, gainb3, gainb4))
-  #offsets <- as.numeric(c(offsetb1, offsetb2, offsetb3, offsetb4))
-
-# b1 <- rast(input_b1)
-# b2 <- rast(input_b2)
-# b3 <- rast(input_b3)
-# b4 <- rast(input_b4)
-
 print("---------------  Aplica gain y offset -------------------")
 b1 <- gainb1*rast(input_b1) + offsetb1
 b2 <- gainb2*rast(input_b2) + offsetb2
@@ -118,23 +106,19 @@ b5 <- gainb5*rast(input_b5) + offsetb5
 print("------------------- QA")
 qa <- rast(input_qa)
 levels(qa) <- NULL 
-#plot(qa)
-
-#writeRaster(qa, file=paste0("xxxQA",fecha,".tif"), overwrite=TRUE, wopt= list(gdal=c("COMPRESS=NONE"), datatype='INT2U'))
-#writeRaster(c(b1,b2,b3), file=paste0("xxxb123",prefix,".tif"), overwrite=TRUE, wopt= list(gdal=c("COMPRESS=NONE"), datatype='FLT4S'))
-
+plot(qa)
 
 # extract values from rast-object into array
 val_qa <- unique(values(qa))[,1]
 
 val_mask <- sapply(val_qa, water)  # apply function to each element and return vector 
 mask_water <- subst(qa, val_qa,val_mask)
-#plot(mask_water) 
+plot(mask_water) 
 
 ## máscara nube y sombra
 val_mask <- sapply(val_qa, cloud_ext)
 mask_cloud <- subst(qa, val_qa,val_mask)
-#plot(mask_cloud)
+plot(mask_cloud)
 
 ## Aplica las mascara de agua, nube y sombra de nube
 
@@ -149,12 +133,9 @@ b5[mask_cloud == 1 | mask_water ==0] <- NA
 # plot(b3)
 # plot(b4)
 
-
-
-
-for(sitio in sitios){ 
-  
-  pts_bati <- vect(paste0("mapas/pts_bati",sitio,".gpkg"))
+## Sitio Mahahual
+sitio <- "mah"
+pts_bati <- vect(paste0("mapas/pts_bati",sitio,".gpkg"))
   ext <- ext(pts_bati)
   subb1 <- crop(b1,ext)
   subb2 <- crop(b2,ext)
@@ -164,18 +145,8 @@ for(sitio in sitios){
   plot(subb1)
   name <- paste0("cortes_L/",prefix,"_",sitio,".tif")
   writeRaster(c(subb1,subb2,subb3,subb4,subb5), file=name, overwrite=TRUE, wopt= list(gdal=c("COMPRESS=NONE"), datatype='FLT4S'))
-} # loop sobre sitios con datos batimetria
-}# condicion sigue (todos los tifs presentes)
-## borra los TIF
-print("borra los tif")
-listatifdel <- list.files(path="/tmp",include.dirs = T, recursive=T,pattern=".TIF",full.names = T)
-file.remove(listatifdel)
-} else {print("tar ya procesado")} # si este tar ya fue procesado
-} # for sobre los tar
-
-
 
 ##############################################################################
-################# IMAGES SENTINEL ya es reflectancia
+################# FIN
 ##############################################################################
 

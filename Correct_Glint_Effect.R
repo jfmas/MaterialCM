@@ -1,4 +1,7 @@
-## Manuscrito Mapeo batimétrico en aguas costeras con imágenes de satélite: Un estudio de caso en el Caribe Mexicano
+## Complemento artículo Ciencias Marinas
+## Manuscrito Mapeo batimétrico en aguas costeras con imágenes de satélite: 
+## Un estudio de caso en el Caribe Mexicano
+
 ## Apply Glint Correction
 ##  J. D. Hedley Corresponding author, A. R. Harborne & P. J. Mumby (2005) 
 ## Technical note: Simple and robust removal of sun glint for mapping 
