@@ -13,7 +13,6 @@ library(xml2)
 ### Lee las imágenes Landsat
 setwd("/home/jf/pCloudDrive/proyectos/Batimetria")
 
-
 ## Functions
 # Function to find fill values from Landsat QA_PIXEL
 ## Ojo hay un bit 0, la position 8 es para bit 7
@@ -42,20 +41,11 @@ water <- function(x){
 
 
 ## Lee los mapas de pts batimétricos
-sitios <- c("rbsk","mah","xcan","xcas")
 
-pts_batirbsk <- vect("mapas/pts_batirbsk.gpkg") # 28980 puntos
-nrow(pts_batirbsk)
+
 pts_batimah <- vect("mapas/pts_batimah.gpkg") # 2844
 nrow(pts_batimah)
-pts_batixcan <- vect("mapas/pts_batixcan.gpkg") # 19975
-nrow(pts_batixcan)
-pts_batixcas <- vect("mapas/pts_batixcas.gpkg") # 29700
-nrow(pts_batixcas)
-pts_batichin <- vect("mapas/pts_batichin.gpkg") # 426
-nrow(pts_batichin)
-pts_batipmor <- vect("mapas/pts_batipmor.gpkg") # 19479
-nrow(pts_batipmor)
+
 
 ##############################################################################
 ################# IMAGES LANDSAT 8 y 9 L2SP ya es reflectancia
