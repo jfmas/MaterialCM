@@ -87,14 +87,16 @@ Las imágenes Landsat 8/9 se descargan de EarthExplorer.
 ### 6. Figuras
 | Guion | Figura |
 |-------|--------|
+| `Scripts_Bati/mapita_pts2026.R` | **Figura 3** — sondeos coloreados por transecto sobre un mapa base de OpenStreetMap, con detalle costero |
 | `analisis_satbathy/turbidity_timeseries.R` | **Figura 4** — serie de turbidez |
 | `analisis_satbathy/make_fig6_v2.R` | **Figura 6** — coeficiente de determinación frente a la profundidad máxima |
 | `analisis_satbathy/make_fig7_v2.R` | **Figura 7** — dispersión ratio–profundidad con el umbral |
 | `analisis_satbathy/make_fig8_residuales.R` | **Figura 8** — mapas batimétricos con residuales |
 | `analisis_satbathy/aplica_admision.R` | **Figura 9** — R² frente a la turbidez |
+| `Scripts_Bati/Fig_ratio2.R` | **Figura S1** (material suplementario) — imagen del ratio de las tres imágenes de marzo 2025 (Landsat 8, Sentinel-2 y SuperDove) |
 
-Las figuras 1–3 y 5 (área de estudio, diagrama de flujo, transectos e imagen de
-ratio) se elaboran con guiones de mapa y con satbathy.
+Las figuras 1 y 2 (área de estudio y diagrama de flujo) se elaboran con guiones
+de mapa y de diagramación no incluidos aquí.
 
 ## Cita
 
