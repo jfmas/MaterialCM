@@ -29,13 +29,16 @@ for (tipo in c("L", "S", "P")) {
 
   mapas[[tipo]] <- tm_shape(ratio) +
     tm_raster(style = "cont", n = 8, palette = "Blues", title = "Ratio") +
+    ## coordenadas (graticulas lat/long) para ubicar las imagenes (revisor A-36)
+    tm_graticules(n.x = 2, n.y = 3, lwd = 0.4, col = "grey65",
+                  labels.size = 0.5, labels.rot = c(0, 90)) +
     tm_layout(main.title = info[[tipo]]$tit, main.title.size = 0.9,
               main.title.fontface = "bold",
               legend.position = c("right", "top"), legend.text.size = 0.55,
               legend.title.size = 0.7, legend.bg.color = "white",
               legend.format = list(scientific = FALSE, digits = NA,
                                    text.separator = "a"),
-              inner.margins = 0)
+              inner.margins = 0.02)
 }
 
 ## arreglo 2x2: fila 1 = Landsat 8 | Sentinel-2 ; fila 2 = SuperDove centrado
